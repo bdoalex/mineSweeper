@@ -18,6 +18,8 @@ public class GameController implements Initializable {
 
     GameModel model = new GameModel();
 
+    Boolean gameDone =false;
+
     @FXML
     private AnchorPane root;
 
@@ -39,18 +41,24 @@ public class GameController implements Initializable {
                 cell.setStyle("-fx-background-color: grey;" + "-fx-border-color: black");
 
                 Text text = new Text();
-                text.setText(Integer.toString(Math.abs(valueOfCell)-1));
+                text.setText(Integer.toString(Math.abs(valueOfCell) - 1));
                 text.setLayoutX(14);
                 text.setLayoutY(30);
                 text.setStrokeWidth(0);
 
-                if (valueOfCell<0 && valueOfCell !=-1) {
+                if (valueOfCell < 0 && valueOfCell != -1) {
 
                     cell.setStyle("-fx-background-color: none;" + "-fx-border-color: black");
                     cell.getChildren().add(text);
-                }else if ( valueOfCell==-1){
+                } else if (valueOfCell == -1) {
                     cell.setStyle("-fx-background-color: none;" + "-fx-border-color: black");
 
+                }
+
+                if (valueOfCell == -10) cell.setStyle("-fx-background-color: red;" + "-fx-border-color: black");
+
+                if (gameDone && valueOfCell == 10){
+                    cell.setStyle("-fx-background-color: orange;" + "-fx-border-color: black");
                 }
                 line.getChildren().add(cell);
             }
@@ -76,9 +84,16 @@ public class GameController implements Initializable {
 
         int explodedBomb = model.play(mouseClickedX, mouseClickedY);
 
-        if (explodedBomb==1) {
-            System.out.println("Mouru");
-        } else if (explodedBomb ==3)drawBoard();
+        if (explodedBomb == 1) {
+            gameDone=true;
+            drawBoard();
+            showEndGame();
+        } else if (explodedBomb == 3) drawBoard();
+    }
+
+    public void showEndGame(){
+        System.out.println("Mouru");
+
     }
 
 
