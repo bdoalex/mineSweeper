@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import mineSweeper.model.GameModel;
+import mineSweeper.variable.GameVariable;
 
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
@@ -18,26 +19,42 @@ public class GameController implements Initializable {
 
     GameModel model = new GameModel();
 
-    Boolean gameDone =false;
+    Boolean gameDone = false;
+
+    @FXML
+    private AnchorPane game;
 
     @FXML
     private AnchorPane root;
 
 
     public void drawBoard() {
-        root.getChildren().clear();
+        game.getChildren().clear();
         int[][] tempBoard = model.getBoard();
-        for (var i = 0; i < tempBoard.length; ++i) {
+
+        double widthBoard = tempBoard.length * GameVariable.SIZE_CELL;
+        double heightBoard = tempBoard[0].length * GameVariable.SIZE_CELL;
+
+        double sizeRootHeight = root.getHeight();
+        double sizeRootWidth = root.getWidth();
+
+        double startX = sizeRootWidth / 2 - widthBoard / 2;
+        double startY = sizeRootHeight / 2 - heightBoard / 2;
+
+        AnchorPane.setTopAnchor(game, startY);
+        AnchorPane.setLeftAnchor(game, startX);
+
+        for (var i = 0; i < tempBoard[0].length; ++i) {
             HBox line = new HBox();
-            AnchorPane.setTopAnchor(line, (double) 50 * i);
-            line.prefHeight(50);
-            AnchorPane.setLeftAnchor(line, (double) 0);
-            AnchorPane.setRightAnchor(line, (double) 0);
-            for (var j = 0; j < tempBoard[0].length; ++j) {
+            AnchorPane.setTopAnchor(line, (double) GameVariable.SIZE_CELL * i);
+            line.prefHeight(GameVariable.SIZE_CELL);
+
+
+            for (var j = 0; j < tempBoard.length; ++j) {
                 int valueOfCell = tempBoard[j][i];
                 Pane cell = new Pane();
-                cell.setPrefWidth(50);
-                cell.setPrefHeight(50);
+                cell.setPrefWidth(GameVariable.SIZE_CELL);
+                cell.setPrefHeight(GameVariable.SIZE_CELL);
                 cell.setStyle("-fx-background-color: grey;" + "-fx-border-color: black");
 
                 Text text = new Text();
@@ -57,41 +74,49 @@ public class GameController implements Initializable {
 
                 if (valueOfCell == -10) cell.setStyle("-fx-background-color: red;" + "-fx-border-color: black");
 
-                if (gameDone && valueOfCell == 10){
+                if (gameDone && valueOfCell == 10) {
                     cell.setStyle("-fx-background-color: orange;" + "-fx-border-color: black");
                 }
                 line.getChildren().add(cell);
             }
-            root.getChildren().add(line);
+            game.getChildren().add(line);
         }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         try {
-            model.generateRandomBoard(10, 10, 15);
-            drawBoard();
+            model.generateRandomBoard(7, 5, 4);
+
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
+
+        root.boundsInLocalProperty().addListener((obs, oldVal, newVal) -> {
+            drawBoard();
+        });
+
+
     }
 
 
     public void onClickRoot(MouseEvent mouseEvent) {
 
-        int mouseClickedX = (int) Math.floor(mouseEvent.getX() / 50);
-        int mouseClickedY = (int) Math.floor(mouseEvent.getY() / 50);
+        int mouseClickedX = (int) Math.floor(mouseEvent.getX() / GameVariable.SIZE_CELL);
+        int mouseClickedY = (int) Math.floor(mouseEvent.getY() / GameVariable.SIZE_CELL);
+
 
         int explodedBomb = model.play(mouseClickedX, mouseClickedY);
 
         if (explodedBomb == 1) {
-            gameDone=true;
+            gameDone = true;
             drawBoard();
             showEndGame();
         } else if (explodedBomb == 3) drawBoard();
     }
 
-    public void showEndGame(){
+    public void showEndGame() {
         System.out.println("Mouru");
 
     }

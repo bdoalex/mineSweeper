@@ -4,6 +4,7 @@ public  class GameVariable {
 
     public static final int MINE_CODE = 10;
 
+    public static final int SIZE_CELL = 50;
     /**
      * The constant MIN_WIDTH.
      */

@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane onMouseClicked="#onClickRoot" fx:id="root" fx:controller="mineSweeper.controller.GameController"
-            maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-            prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="root" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+            AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="mineSweeper.controller.GameController">
+    <children>
+        <AnchorPane AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Bomb : " AnchorPane.leftAnchor="10.0"
+                      AnchorPane.topAnchor="10.0"/>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Minesweeper" AnchorPane.leftAnchor="250.0"
+                      AnchorPane.topAnchor="10.0"/>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Time" AnchorPane.rightAnchor="10.0"
+                      AnchorPane.topAnchor="10.0"/>
 
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="game"  onMousePressed="#onClickRoot" AnchorPane.topAnchor="42.0">
+
+        </AnchorPane>
+    </children>
 </AnchorPane>

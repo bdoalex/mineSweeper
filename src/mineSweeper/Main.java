@@ -15,11 +15,10 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    private static Scene scene;
+
 
     private static AnchorPane mainLayout;
 
-    private static AnchorPane containerContent;
 
 
     @Override
@@ -29,16 +28,15 @@ public class Main extends Application {
 
         mainLayout = (AnchorPane) loadFXML("views/mainLayout");
 
-        containerContent = (AnchorPane) mainLayout.getChildren().get(0);
-        containerContent.getChildren().add(loadFXML("views/launcherLayout"));
+        mainLayout.getChildren().add(loadFXML("views/launcherLayout"));
 
 
-        Scene scene = new Scene(mainLayout, 850, 500);
+        Scene scene = new Scene(mainLayout);
+
 
         stage.setScene(scene);
         stage.show();
-        stage.setMinHeight(GameVariable.MIN_HEIGHT);
-        stage.setMinWidth(GameVariable.MIN_WIDTH);
+
 
     }
 
@@ -55,8 +53,8 @@ public class Main extends Application {
     public static void showView(String rootElement) {
         try {
 
-            containerContent.getChildren().clear();
-            containerContent.getChildren().add(loadFXML(rootElement));
+            mainLayout.getChildren().clear();
+            mainLayout.getChildren().add(loadFXML(rootElement));
 
         } catch (IOException e) {
 
