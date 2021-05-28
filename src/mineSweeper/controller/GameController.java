@@ -102,6 +102,17 @@ public class GameController implements Initializable {
 
                 if (valueOfCell == -10) {
 
+                    File bombExplodedImageFile = new File(GameVariable.PATH_TO_RESOURCES + "images/bombExploded.png");
+                    Image bombExplodedImage = new Image(bombExplodedImageFile.toURI().toString());
+                    ImageView bombExplodedImageView = new ImageView(bombExplodedImage);
+                    bombExplodedImageView.setFitWidth(GameVariable.SIZE_CELL);
+                    bombExplodedImageView.setFitHeight(GameVariable.SIZE_CELL);
+
+                    cell.getChildren().clear();
+                    cell.getChildren().add(bombExplodedImageView);
+                }
+
+                if (gameIsDone && valueOfCell == 10) {
                     File bombImageFile = new File(GameVariable.PATH_TO_RESOURCES + "images/bomb.png");
                     Image bombImage = new Image(bombImageFile.toURI().toString());
                     ImageView bombImageView = new ImageView(bombImage);
@@ -112,8 +123,14 @@ public class GameController implements Initializable {
                     cell.getChildren().add(bombImageView);
                 }
 
-                if (gameIsDone && valueOfCell == 10) {
-                    cell.setStyle("-fx-background-color: orange;" + "-fx-border-color: black");
+                if (valueOfCell > 30) {
+                    File flagImageFile = new File(GameVariable.PATH_TO_RESOURCES + "images/flag.png");
+                    Image flagImage = new Image(flagImageFile.toURI().toString());
+                    ImageView flagImageView = new ImageView(flagImage);
+                    flagImageView.setFitWidth(GameVariable.SIZE_CELL);
+                    flagImageView.setFitHeight(GameVariable.SIZE_CELL);
+                    cell.getChildren().clear();
+                    cell.getChildren().add(flagImageView);
                 }
                 line.getChildren().add(cell);
             }
@@ -145,7 +162,8 @@ public class GameController implements Initializable {
         int mouseClickedY = (int) Math.floor(mouseEvent.getY() / GameVariable.SIZE_CELL);
 
         if (mouseEvent.isSecondaryButtonDown()) {
-
+            model.flag(mouseClickedX, mouseClickedY);
+            drawBoard();
         } else {
             int explodedBomb = model.play(mouseClickedX, mouseClickedY);
 

@@ -29,5 +29,8 @@ public  class GameVariable {
     public static final int MIN_HEIGHT = 500;
 
 
+    /**
+     * The constant PATH_TO_RESOURCES.
+     */
     public static final String PATH_TO_RESOURCES = "src/mineSweeper/resources/";
 }

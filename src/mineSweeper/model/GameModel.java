@@ -50,6 +50,10 @@ public class GameModel {
 
         if (posX < this.board.length && posX >= 0 && posY < this.board[0].length && posY >= 0) {
 
+            if (this.board[posX][posY] > 30) {
+                this.board[posX][posY] -= 30;
+            }
+
             if (this.board[posX][posY] == GameVariable.MINE_CODE) {
                 this.board[posX][posY] *= -1;
                 return 1; //is a mine
@@ -77,7 +81,7 @@ public class GameModel {
 
 
                                     if (!allPositionsChecked.contains(pos) && indexX >= 0 && indexX < this.board.length && indexY >= 0 && indexY < this.board[0].length) {
-                                        if (this.board[indexX][indexY] != GameVariable.MINE_CODE &&  this.board[indexX][indexY] >0) {
+                                        if (this.board[indexX][indexY] != GameVariable.MINE_CODE && this.board[indexX][indexY] > 0) {
                                             allPositions.add(pos);
                                             allPositionsChecked.add(pos);
                                         }
@@ -93,6 +97,22 @@ public class GameModel {
 
                 return 3; //can play
             }
+        } else {
+            throw new Error("Out of bound");
+        }
+    }
+
+    public void flag(int posX, int posY) {
+        if (posX < this.board.length && posX >= 0 && posY < this.board[0].length && posY >= 0) {
+            if (this.board[posX][posY] > 0) {
+                if (Math.abs(this.board[posX][posY]) > 30) {
+                    this.board[posX][posY] -= 30; //si valeur >30 alors il y a un flag
+                } else {
+                    this.board[posX][posY] += 30; //si valeur >30 alors il y a un flag
+                }
+            }
+
+
         } else {
             throw new Error("Out of bound");
         }
