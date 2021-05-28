@@ -10,8 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * The type Game model.
+ */
 public class GameModel {
 
+    /**
+     * Get board int [ ] [ ].
+     *
+     * @return the int [ ] [ ]
+     */
     public int[][] getBoard() {
         return board;
     }
@@ -32,12 +40,12 @@ public class GameModel {
 
 
     /**
+     * Play int.
+     *
      * @param posX position in board
      * @param posY position in board
      * @return if the position is a mine return true
      */
-
-
     public int play(int posX, int posY) {
 
         if (posX < this.board.length && posX >= 0 && posY < this.board[0].length && posY >= 0) {
@@ -91,9 +99,12 @@ public class GameModel {
     }
 
     /**
+     * Generate random board.
+     *
      * @param width       number cells
      * @param height      number cells
      * @param numberBombs number bombs
+     * @throws NoSuchAlgorithmException the no such algorithm exception
      */
     public void generateRandomBoard(int width, int height, int numberBombs) throws NoSuchAlgorithmException {
 

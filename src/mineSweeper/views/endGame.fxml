@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="187.0" prefWidth="356.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mineSweeper.controller.EndGameController">
+   <children>
+      <Text fx:id="endText" layoutX="162.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PERDU !" />
+      <Button fx:id="menuButton" layoutX="146.0" layoutY="131.0" mnemonicParsing="false" onAction="#menuButtonPressed" text="Menu" />
+   </children>
+</AnchorPane>
