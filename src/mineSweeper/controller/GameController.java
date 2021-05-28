@@ -49,9 +49,6 @@ public class GameController implements Initializable {
     /**
      * The Bomb image file.
      */
-    File bombImageFile = new File("../res/bomb.png");
-
-    private final Image bombImage = new Image(bombImageFile.toURI().toString());
 
 
     /**
@@ -84,6 +81,8 @@ public class GameController implements Initializable {
                 Pane cell = new Pane();
                 cell.setPrefWidth(GameVariable.SIZE_CELL);
                 cell.setPrefHeight(GameVariable.SIZE_CELL);
+
+
                 cell.setStyle("-fx-background-color: grey;" + "-fx-border-color: black");
 
                 Text text = new Text();
@@ -101,9 +100,14 @@ public class GameController implements Initializable {
 
                 }
 
-                if (valueOfCell == -10){
-                    cell.setStyle("-fx-background-color: red;" + "-fx-border-color: black");
+                if (valueOfCell == -10) {
+
+                    File bombImageFile = new File(GameVariable.PATH_TO_RESOURCES + "images/bomb.png");
+                    Image bombImage = new Image(bombImageFile.toURI().toString());
                     ImageView bombImageView = new ImageView(bombImage);
+                    bombImageView.setFitWidth(GameVariable.SIZE_CELL);
+                    bombImageView.setFitHeight(GameVariable.SIZE_CELL);
+
                     cell.getChildren().clear();
                     cell.getChildren().add(bombImageView);
                 }
@@ -129,9 +133,7 @@ public class GameController implements Initializable {
             drawBoard();
         });
 
-
     }
-
 
     /**
      * On click root.
@@ -142,14 +144,17 @@ public class GameController implements Initializable {
         int mouseClickedX = (int) Math.floor(mouseEvent.getX() / GameVariable.SIZE_CELL);
         int mouseClickedY = (int) Math.floor(mouseEvent.getY() / GameVariable.SIZE_CELL);
 
+        if (mouseEvent.isSecondaryButtonDown()) {
 
-        int explodedBomb = model.play(mouseClickedX, mouseClickedY);
+        } else {
+            int explodedBomb = model.play(mouseClickedX, mouseClickedY);
 
-        if (explodedBomb == 1) {
-            gameIsDone = true;
-            drawBoard();
-            showEndGame();
-        } else if (explodedBomb == 3) drawBoard();
+            if (explodedBomb == 1) {
+                gameIsDone = true;
+                drawBoard();
+                showEndGame();
+            } else if (explodedBomb == 3) drawBoard();
+        }
     }
 
     /**
@@ -174,11 +179,7 @@ public class GameController implements Initializable {
             stage.showAndWait();
 
 
-
-
-
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -186,11 +187,9 @@ public class GameController implements Initializable {
     /**
      * Go to launcher.
      */
-    public void goToLauncher(){
+    public void goToLauncher() {
         Main.showView("views/launcherLayout");
     }
-
-
 
 
 }
