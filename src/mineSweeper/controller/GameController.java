@@ -24,6 +24,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * The type Game controller.
@@ -46,10 +48,10 @@ public class GameController implements Initializable {
     @FXML
     private AnchorPane root;
 
-    /**
-     * The Bomb image file.
-     */
+    @FXML
+    private Text timerText;
 
+    private int timerCount;
 
     /**
      * Draw board.
@@ -141,6 +143,7 @@ public class GameController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
+            Timer();
             model.generateRandomBoard(ParametersDialogController.getInstance().getWidth(), ParametersDialogController.getInstance().getHeight(), ParametersDialogController.getInstance().getNumberBombs());
 
         } catch (NoSuchAlgorithmException e) {
@@ -209,5 +212,42 @@ public class GameController implements Initializable {
         Main.showView("views/launcherLayout");
     }
 
+    /**
+     * Timer.
+     */
+    public void Timer() {
+        //one-time use timer: prints stuff after 1s
+        Timer myRepeatingTimer = new Timer();
+        myRepeatingTimer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                increaseTimerCount();
+                updateTimerText();
+            }
+        }, 0, 1000);
+    }
 
+    /**
+     * Update timer text.
+     */
+    public void updateTimerText(){
+        timerText.setText("Time : " + timerCount);
+    }
+
+
+    /**
+     * Gets timer count.
+     *
+     * @return the timer count
+     */
+    public int getTimerCount() {
+        return timerCount;
+    }
+
+    /**
+     * Increase timer count.
+     */
+    public void increaseTimerCount() {
+        this.timerCount++;
+    }
 }
