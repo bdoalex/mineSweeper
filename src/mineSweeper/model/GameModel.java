@@ -102,6 +102,12 @@ public class GameModel {
         }
     }
 
+    /**
+     * Flag.
+     *
+     * @param posX the pos x
+     * @param posY the pos y
+     */
     public void flag(int posX, int posY) {
         if (posX < this.board.length && posX >= 0 && posY < this.board[0].length && posY >= 0) {
             if (this.board[posX][posY] > 0) {
