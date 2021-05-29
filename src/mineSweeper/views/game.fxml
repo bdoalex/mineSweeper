@@ -1,24 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="root" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-            AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="mineSweeper.controller.GameController">
+<AnchorPane fx:id="root" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mineSweeper.controller.GameController">
     <children>
         <AnchorPane AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Bomb : " AnchorPane.leftAnchor="10.0"
-                      AnchorPane.topAnchor="10.0"/>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Minesweeper" AnchorPane.leftAnchor="250.0"
-                      AnchorPane.topAnchor="10.0"/>
-                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Time" AnchorPane.rightAnchor="10.0"
-                      AnchorPane.topAnchor="10.0"/>
+            <HBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Bomb : ">
+                     <HBox.margin>
+                        <Insets right="50.0" />
+                     </HBox.margin>
+                  </Text>
+                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Time">
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+            </HBox>
 
             </children>
         </AnchorPane>
-        <AnchorPane fx:id="game"  onMousePressed="#onClickRoot" AnchorPane.topAnchor="42.0">
+        <AnchorPane fx:id="game" onMousePressed="#onClickRoot" AnchorPane.topAnchor="42.0">
 
         </AnchorPane>
     </children>
