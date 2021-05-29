@@ -51,7 +51,33 @@ public class GameController implements Initializable {
     @FXML
     private Text timerText;
 
+    @FXML
+    private ImageView bombImageView;
+
+    @FXML
+    private ImageView timeImageView;
+
     private int timerCount;
+
+    /**
+     * Gets bomb count.
+     *
+     * @return the bomb count
+     */
+    public int getBombCount() {
+        return bombCount;
+    }
+
+    /**
+     * Sets bomb count.
+     *
+     * @param bombCount the bomb count
+     */
+    public void setBombCount(int bombCount) {
+        this.bombCount = bombCount;
+    }
+
+    private int bombCount;
 
     /**
      * Draw board.
@@ -143,6 +169,16 @@ public class GameController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
+            File bombImageFile = new File(GameVariable.PATH_TO_RESOURCES + "images/bomb.png");
+            Image bombImage = new Image(bombImageFile.toURI().toString());
+            bombImageView.setImage(bombImage);
+
+            File timerImageFile = new File(GameVariable.PATH_TO_RESOURCES + "images/timer.png");
+            Image timerImage = new Image(timerImageFile.toURI().toString());
+            timeImageView.setImage(timerImage);
+
+            bombCount = ParametersDialogController.getInstance().getNumberBombs();
+
             Timer();
             model.generateRandomBoard(ParametersDialogController.getInstance().getWidth(), ParametersDialogController.getInstance().getHeight(), ParametersDialogController.getInstance().getNumberBombs());
 
