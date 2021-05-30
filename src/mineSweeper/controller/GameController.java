@@ -52,6 +52,9 @@ public class GameController implements Initializable {
     private Text timerText;
 
     @FXML
+    private Text bombText;
+
+    @FXML
     private ImageView bombImageView;
 
     @FXML
@@ -59,25 +62,24 @@ public class GameController implements Initializable {
 
     private int timerCount;
 
-    /**
-     * Gets bomb count.
-     *
-     * @return the bomb count
-     */
-    public int getBombCount() {
-        return bombCount;
-    }
-
-    /**
-     * Sets bomb count.
-     *
-     * @param bombCount the bomb count
-     */
-    public void setBombCount(int bombCount) {
-        this.bombCount = bombCount;
-    }
-
     private int bombCount;
+
+    private final Timer timer = new Timer();
+
+    /**
+     * Decrease bomb count.
+     */
+    public void decreaseBombCount() {
+        this.bombCount --;
+    }
+
+    /**
+     * Increase bomb count.
+     */
+    public void increaseBombCount() {
+        this.bombCount ++;
+    }
+
 
     /**
      * Draw board.
@@ -166,31 +168,6 @@ public class GameController implements Initializable {
         }
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            File bombImageFile = new File(GameVariable.PATH_TO_RESOURCES + "images/bomb.png");
-            Image bombImage = new Image(bombImageFile.toURI().toString());
-            bombImageView.setImage(bombImage);
-
-            File timerImageFile = new File(GameVariable.PATH_TO_RESOURCES + "images/timer.png");
-            Image timerImage = new Image(timerImageFile.toURI().toString());
-            timeImageView.setImage(timerImage);
-
-            bombCount = ParametersDialogController.getInstance().getNumberBombs();
-
-            Timer();
-            model.generateRandomBoard(ParametersDialogController.getInstance().getWidth(), ParametersDialogController.getInstance().getHeight(), ParametersDialogController.getInstance().getNumberBombs());
-
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        root.boundsInLocalProperty().addListener((obs, oldVal, newVal) -> {
-            drawBoard();
-        });
-
-    }
-
     /**
      * On click root.
      *
@@ -201,7 +178,16 @@ public class GameController implements Initializable {
         int mouseClickedY = (int) Math.floor(mouseEvent.getY() / GameVariable.SIZE_CELL);
 
         if (mouseEvent.isSecondaryButtonDown()) {
-            model.flag(mouseClickedX, mouseClickedY);
+            boolean isFlag = model.isFlag(mouseClickedX, mouseClickedY);
+
+            if (isFlag){
+                decreaseBombCount();
+
+            }else{
+                increaseBombCount();
+
+            }
+            bombText.setText("Bombes : " + bombCount);
             drawBoard();
         } else {
             int explodedBomb = model.play(mouseClickedX, mouseClickedY);
@@ -219,6 +205,8 @@ public class GameController implements Initializable {
      */
     public void showEndGame() {
         try {
+            timer.cancel();
+            timer.purge();
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("../views/endGame.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
@@ -253,8 +241,8 @@ public class GameController implements Initializable {
      */
     public void Timer() {
         //one-time use timer: prints stuff after 1s
-        Timer myRepeatingTimer = new Timer();
-        myRepeatingTimer.scheduleAtFixedRate(new TimerTask() {
+
+        timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 increaseTimerCount();
@@ -285,5 +273,32 @@ public class GameController implements Initializable {
      */
     public void increaseTimerCount() {
         this.timerCount++;
+    }
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            File bombImageFile = new File(GameVariable.PATH_TO_RESOURCES + "images/bomb.png");
+            Image bombImage = new Image(bombImageFile.toURI().toString());
+            bombImageView.setImage(bombImage);
+
+            File timerImageFile = new File(GameVariable.PATH_TO_RESOURCES + "images/timer.png");
+            Image timerImage = new Image(timerImageFile.toURI().toString());
+            timeImageView.setImage(timerImage);
+
+            bombCount = ParametersDialogController.getInstance().getNumberBombs();
+            bombText.setText("Bombes : " + bombCount);
+
+            Timer();
+            model.generateRandomBoard(ParametersDialogController.getInstance().getWidth(), ParametersDialogController.getInstance().getHeight(), ParametersDialogController.getInstance().getNumberBombs());
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        root.boundsInLocalProperty().addListener((obs, oldVal, newVal) -> {
+            drawBoard();
+        });
+
     }
 }
