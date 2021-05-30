@@ -81,6 +81,9 @@ public class GameModel {
 
 
                                     if (!allPositionsChecked.contains(pos) && indexX >= 0 && indexX < this.board.length && indexY >= 0 && indexY < this.board[0].length) {
+                                        if (this.board[indexX][indexY] > 30) {
+                                            this.board[indexX][indexY] -= 30;
+                                        }
                                         if (this.board[indexX][indexY] != GameVariable.MINE_CODE && this.board[indexX][indexY] > 0) {
                                             allPositions.add(pos);
                                             allPositionsChecked.add(pos);

@@ -24,7 +24,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        stage.setTitle("MineSweeper");
+        stage.setTitle("Démineur");
 
         mainLayout = (AnchorPane) loadFXML("views/mainLayout");
 

@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Spinner?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="187.0" prefWidth="356.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mineSweeper.controller.ParametersDialogController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="187.0" prefWidth="356.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mineSweeper.controller.ParametersDialogController">
     <children>
         <VBox alignment="CENTER" prefHeight="187.0" prefWidth="356.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -16,7 +13,7 @@
                     <children>
                         <VBox alignment="CENTER">
                             <children>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Height " />
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Hauteur" />
                                 <Spinner fx:id="heightSpinner" prefHeight="13.0" prefWidth="82.0">
                                     <opaqueInsets>
                                         <Insets />
@@ -29,7 +26,7 @@
                         </VBox>
                         <VBox alignment="CENTER">
                             <children>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="width" />
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Largeur" />
                                 <Spinner fx:id="widthSpinner" prefHeight="13.0" prefWidth="82.0">
                                     <opaqueInsets>
                                         <Insets />
@@ -50,7 +47,7 @@
                 </HBox>
                 <VBox alignment="CENTER">
                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Bombs" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Bombes" />
                         <Spinner fx:id="bombsSpinner" prefHeight="13.0" prefWidth="82.0">
                             <opaqueInsets>
                                 <Insets />
@@ -58,7 +55,7 @@
                         </Spinner>
                     </children>
                 </VBox>
-                <Button fx:id="playButton" mnemonicParsing="false" onAction="#playButtonPressed" text="Play !">
+                <Button fx:id="playButton" mnemonicParsing="false" onAction="#playButtonPressed" text="Jouer">
                     <VBox.margin>
                         <Insets top="20.0" />
                     </VBox.margin>

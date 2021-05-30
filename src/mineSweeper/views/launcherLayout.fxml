@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="root" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mineSweeper.controller.LauncherController">
+<AnchorPane fx:id="root" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mineSweeper.controller.LauncherController">
     <children>
         <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
             <children>
-                <Button fx:id="launcherButton" mnemonicParsing="false" onAction="#launcherButtonOnAction" text="Launch">
+                <Button fx:id="launcherButton" mnemonicParsing="false" onAction="#launcherButtonOnAction" text="Lancer">
                     <font>
                         <Font size="18.0" />
                     </font>
@@ -19,7 +17,7 @@
         </VBox>
         <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="0.0" prefWidth="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
             <children>
-                <Text fx:id="titleTextField" strokeType="OUTSIDE" strokeWidth="0.0" text="Minesweeper" textAlignment="CENTER" textOrigin="CENTER">
+                <Text fx:id="titleTextField" strokeType="OUTSIDE" strokeWidth="0.0" text="Démineur" textAlignment="CENTER" textOrigin="CENTER">
                     <font>
                         <Font name="Elephant" size="39.0" />
                     </font>
