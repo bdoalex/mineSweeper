@@ -62,22 +62,52 @@ public class GameController implements Initializable {
 
     private int timerCount;
 
+
+    /**
+     * Gets bomb count.
+     *
+     * @return the bomb count
+     */
+    public int getBombCount() {
+        return bombCount;
+    }
+
+
     private int bombCount;
 
     private final Timer timer = new Timer();
+
+    private static GameController instance;
+
+
+    /**
+     * Game controller.
+     */
+    public GameController() {
+        instance = this;
+    }
+
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
+    public static GameController getInstance() {
+        return instance;
+    }
 
     /**
      * Decrease bomb count.
      */
     public void decreaseBombCount() {
-        this.bombCount --;
+        this.bombCount--;
     }
 
     /**
      * Increase bomb count.
      */
     public void increaseBombCount() {
-        this.bombCount ++;
+        this.bombCount++;
     }
 
 
@@ -180,10 +210,10 @@ public class GameController implements Initializable {
         if (mouseEvent.isSecondaryButtonDown()) {
             boolean isFlag = model.isFlag(mouseClickedX, mouseClickedY);
 
-            if (isFlag){
+            if (isFlag) {
                 decreaseBombCount();
 
-            }else{
+            } else {
                 increaseBombCount();
 
             }
@@ -254,7 +284,7 @@ public class GameController implements Initializable {
     /**
      * Update timer text.
      */
-    public void updateTimerText(){
+    public void updateTimerText() {
         timerText.setText("Time : " + timerCount);
     }
 
