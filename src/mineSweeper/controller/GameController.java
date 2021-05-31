@@ -174,7 +174,7 @@ public class GameController implements Initializable {
 
                 }
 
-                if (valueOfCell == -10) {
+                if (valueOfCell == -10) {//Si la bombe vient d'exploser on affiche la bombre qui vient d'exploser
 
                     File bombExplodedImageFile = new File(GameVariable.PATH_TO_RESOURCES + "images/bombExploded.png");
                     Image bombExplodedImage = new Image(bombExplodedImageFile.toURI().toString());
@@ -184,9 +184,7 @@ public class GameController implements Initializable {
 
                     cell.getChildren().clear();
                     cell.getChildren().add(bombExplodedImageView);
-                }
-
-                if (gameIsDone && valueOfCell == 10) {
+                }else if (gameIsDone && valueOfCell == 10) {//Si la partie est terminée, on affiche les bombes restantes
                     File bombImageFile = new File(GameVariable.PATH_TO_RESOURCES + "images/bomb.png");
                     Image bombImage = new Image(bombImageFile.toURI().toString());
                     ImageView bombImageView = new ImageView(bombImage);
@@ -195,9 +193,7 @@ public class GameController implements Initializable {
 
                     cell.getChildren().clear();
                     cell.getChildren().add(bombImageView);
-                }
-
-                if (valueOfCell > 30) {
+                } else if (valueOfCell > 30) {
                     File flagImageFile = new File(GameVariable.PATH_TO_RESOURCES + "images/flag.png");
                     Image flagImage = new Image(flagImageFile.toURI().toString());
                     ImageView flagImageView = new ImageView(flagImage);
@@ -354,7 +350,7 @@ public class GameController implements Initializable {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        root.boundsInLocalProperty().addListener((obs, oldVal, newVal) -> drawBoard());
+        root.boundsInLocalProperty().addListener((obs, oldVal, newVal) -> drawBoard());//Permet d'actualiser l'affichage à chaque modification de root
 
     }
 }
