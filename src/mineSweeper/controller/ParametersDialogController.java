@@ -20,9 +20,9 @@ public class ParametersDialogController implements Initializable {
     @FXML
     private Button playButton;
 
-    private int width = 7;
-    private int height = 5;
-    private int numberBombs = 4;
+    private int width;
+    private int height;
+    private int numberBombs;
 
 
     @FXML

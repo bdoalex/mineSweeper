@@ -50,7 +50,7 @@ public class GameModel {
 
         if (posX < this.board.length && posX >= 0 && posY < this.board[0].length && posY >= 0) {
 
-            if (this.board[posX][posY] > 30) {
+            if (this.board[posX][posY] > 30) {//si Flag alors on enlève 30
                 this.board[posX][posY] -= 30;
             }
 

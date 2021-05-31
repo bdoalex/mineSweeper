@@ -144,6 +144,7 @@ public class GameController implements Initializable {
         AnchorPane.setTopAnchor(game, startY);
         AnchorPane.setLeftAnchor(game, startX);
 
+        //Générer la vue du tableau
         for (var i = 0; i < tempBoard[0].length; ++i) {
             HBox line = new HBox();
             AnchorPane.setTopAnchor(line, (double) GameVariable.SIZE_CELL * i);
