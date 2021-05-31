@@ -55,6 +55,11 @@ public class EndGameController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        if (GameController.getInstance().isGameIsWin()){
+            endText.setText("Bravo ! Vous avez gagné ! ");
+        }else{
+            endText.setText("Perdu !");
+        }
         File bombImageFile = new File(GameVariable.PATH_TO_RESOURCES + "images/bomb.png");
         Image bombImage = new Image(bombImageFile.toURI().toString());
         bombImageView.setImage(bombImage);

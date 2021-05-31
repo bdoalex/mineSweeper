@@ -79,6 +79,20 @@ public class GameController implements Initializable {
 
     private static GameController instance;
 
+    /**
+     * true = win
+     * false = lost
+     * */
+    private boolean gameIsWin;
+
+    /**
+     * Is game is win .
+     *
+     * @return the result
+     */
+    public boolean isGameIsWin() {
+        return gameIsWin;
+    }
 
     /**
      * Game controller.
@@ -208,37 +222,51 @@ public class GameController implements Initializable {
         int mouseClickedY = (int) Math.floor(mouseEvent.getY() / GameVariable.SIZE_CELL);
 
         if (mouseEvent.isSecondaryButtonDown()) {
-            boolean isFlag = model.isFlag(mouseClickedX, mouseClickedY);
+            int isFlag = model.isFlag(mouseClickedX, mouseClickedY);
 
-            if (isFlag) {
-                decreaseBombCount();
-
-            } else {
+            if (isFlag == 1) {
                 increaseBombCount();
+
+            } else if (isFlag == 2) {
+                decreaseBombCount();
 
             }
             bombText.setText("Bombes : " + bombCount);
             drawBoard();
+
+
         } else {
             int explodedBomb = model.play(mouseClickedX, mouseClickedY);
+            boolean resultGame = model.gameIsWin();
 
-            if (explodedBomb == 1) {
-                gameIsDone = true;
+
+            //Optimisation possible
+            if (resultGame) {
                 drawBoard();
-                showEndGame();
-            } else if (explodedBomb == 3) drawBoard();
+                gameIsWin =true;
+                endGame();
+            } else {
+                if (explodedBomb == 1) {
+                    gameIsDone = true;
+                    drawBoard();
+                    endGame();
+
+                } else if (explodedBomb == 3) drawBoard();
+            }
+
+
         }
     }
 
     /**
      * Show end game.
      */
-    public void showEndGame() {
+    public void endGame() {
         try {
             timer.cancel();
             timer.purge();
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("../views/endGame.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("../views/endGameLayout.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
             stage.setTitle("End");
@@ -326,9 +354,7 @@ public class GameController implements Initializable {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        root.boundsInLocalProperty().addListener((obs, oldVal, newVal) -> {
-            drawBoard();
-        });
+        root.boundsInLocalProperty().addListener((obs, oldVal, newVal) -> drawBoard());
 
     }
 }

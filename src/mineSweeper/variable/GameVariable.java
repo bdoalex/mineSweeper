@@ -18,16 +18,6 @@ public  class GameVariable {
      */
     public static final int SIZE_CELL = 50;
 
-    /**
-     * The constant MIN_WIDTH.
-     */
-    public static final  int MIN_WIDTH = 800;
-
-    /**
-     * The constant MIN_HEIGHT.
-     */
-    public static final int MIN_HEIGHT = 500;
-
 
     /**
      * The constant PATH_TO_RESOURCES.

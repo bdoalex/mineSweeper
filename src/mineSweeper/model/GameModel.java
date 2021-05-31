@@ -15,8 +15,6 @@ import java.util.List;
  */
 public class GameModel {
 
-    int bombCount;
-
     /**
      * Get board int [ ] [ ].
      *
@@ -112,23 +110,47 @@ public class GameModel {
      *
      * @param posX the pos x
      * @param posY the pos y
+     * @return the int
      */
-    public boolean isFlag(int posX, int posY) {
+    public int isFlag(int posX, int posY) {
         if (posX < this.board.length && posX >= 0 && posY < this.board[0].length && posY >= 0) {
             if (this.board[posX][posY] > 0) {
                 if (Math.abs(this.board[posX][posY]) > 30) {
                     this.board[posX][posY] -= 30; //si valeur >30 alors il y a un flag
-                    return false; //flag enlevé
+                    return 1; //flag enlevé
                 } else {
                     this.board[posX][posY] += 30; //on ajoute un flag
-                    return true; // flag remis
+                    return 2; // flag remis
                 }
             }
 
         } else {
             throw new Error("Out of bound");
         }
-        return false;
+        return 3;
+    }
+
+    /**
+     * check if Game is win .
+     *
+     * @return the result (win game or not)
+     */
+    public boolean gameIsWin(){
+        boolean isWin = true;
+
+        for (int[] tempTab : this.board) {
+            for (int elem : tempTab) {
+                if (elem>30){
+                    elem = elem - 30;
+                }
+
+                if (elem > 0 && elem !=10) {
+                    isWin = false;
+                    break;
+                }
+            }
+        }
+        return isWin;
     }
 
     /**

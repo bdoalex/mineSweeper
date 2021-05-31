@@ -1,11 +1,11 @@
 package mineSweeper.controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import mineSweeper.Main;
 
@@ -33,6 +33,9 @@ public class ParametersDialogController implements Initializable {
 
     @FXML
     private Spinner<Integer> bombsSpinner;
+
+    @FXML
+    private Text errorText;
 
     /**
      * The Initial value.
@@ -75,16 +78,23 @@ public class ParametersDialogController implements Initializable {
     /**
      * Play button pressed.
      *
-     * @param event the event
      */
     @FXML
-    void playButtonPressed(ActionEvent event) {
-        setHeight(heightSpinner.getValue());
-        setWidth(widthSpinner.getValue());
-        setNumberBombs(bombsSpinner.getValue());
-        Main.showView("views/game");
-        Stage stage = (Stage) playButton.getScene().getWindow();
-        stage.close();
+    void playButtonPressed() {
+        if (bombsSpinner.getValue() == (widthSpinner.getValue() *  heightSpinner.getValue())){
+            errorText.setText("Il n'y a pas assez de bombe");
+        }else if (bombsSpinner.getValue() >= widthSpinner.getValue() +  heightSpinner.getValue()){
+            errorText.setText("Il y a trop de bombe");
+
+        }else {
+            setHeight(heightSpinner.getValue());
+            setWidth(widthSpinner.getValue());
+            setNumberBombs(bombsSpinner.getValue());
+            Main.showView("views/game");
+            Stage stage = (Stage) playButton.getScene().getWindow();
+            stage.close();
+        }
+
 
     }
 
